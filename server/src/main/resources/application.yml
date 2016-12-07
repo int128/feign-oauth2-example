@@ -4,5 +4,9 @@ server:
   port: 8081
 
 security:
-  basic:
-    enabled: false
+  oauth2.client:
+    client-id: theId
+    client-secret: theSecret
+  user:
+    name: theUser
+    password: thePassword
