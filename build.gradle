@@ -1,0 +1,36 @@
+buildscript {
+    repositories {
+        jcenter()
+    }
+    dependencies {
+        classpath 'org.springframework.boot:spring-boot-gradle-plugin:1.4.1.RELEASE'
+    }
+}
+
+subprojects {
+    apply plugin: 'groovy'
+    apply plugin: 'spring-boot'
+    apply plugin: 'idea'
+
+    sourceCompatibility = JavaVersion.VERSION_1_8
+    targetCompatibility = JavaVersion.VERSION_1_8
+
+    repositories {
+        jcenter()
+    }
+
+    dependencies {
+        // Groovy
+        compile 'org.codehaus.groovy:groovy-all:2.4.7'
+
+        // Spring
+        runtime 'org.springframework.boot:spring-boot-devtools'
+    }
+
+    idea {
+        module {
+            inheritOutputDirs = false
+            outputDir = file("$buildDir/classes/main/")
+        }
+    }
+}

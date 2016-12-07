@@ -1,0 +1,6 @@
+spring.main.web-environment: false
+
+hello.service:
+  url: http://localhost:8081
+
+feign.hystrix.enabled: false

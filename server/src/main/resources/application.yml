@@ -1,0 +1,8 @@
+debug: true
+
+server:
+  port: 8081
+
+security:
+  basic:
+    enabled: false

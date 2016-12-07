@@ -1,0 +1,15 @@
+# Credential
+/api-gateway/src/main/resources/config
+
+# Gradle
+.gradle
+build
+
+# Eclipse
+.settings
+.classpath
+.project
+
+# IDEA
+.idea
+*.iml

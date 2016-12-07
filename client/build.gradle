@@ -1,0 +1,5 @@
+dependencies {
+    compile 'org.springframework.boot:spring-boot-starter'
+    compile 'org.springframework.cloud:spring-cloud-starter-feign:1.2.1.RELEASE'
+    compile 'org.springframework.cloud:spring-cloud-starter-sleuth:1.0.10.RELEASE'
+}
