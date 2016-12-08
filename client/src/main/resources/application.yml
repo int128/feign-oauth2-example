@@ -1,6 +1,18 @@
 spring.main.web-environment: false
 
+logging.level:
+  # Enable logging of access token request
+  org.springframework.web.client: DEBUG
+
 hello.service:
   url: http://localhost:8081
 
 feign.hystrix.enabled: false
+
+security:
+  oauth2:
+    hello:
+      access-token-uri: http://localhost:8081/oauth/token
+      client-id: theId
+      client-secret: theSecret
+      scope: theScope
