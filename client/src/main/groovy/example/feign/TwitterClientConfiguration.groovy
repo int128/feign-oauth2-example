@@ -8,21 +8,19 @@ import org.springframework.context.annotation.Configuration
 import org.springframework.security.oauth2.client.DefaultOAuth2ClientContext
 import org.springframework.security.oauth2.client.OAuth2ClientContext
 import org.springframework.security.oauth2.client.resource.OAuth2ProtectedResourceDetails
-import org.springframework.security.oauth2.client.token.grant.password.ResourceOwnerPasswordResourceDetails
+import org.springframework.security.oauth2.client.token.grant.client.ClientCredentialsResourceDetails
 
 @Configuration
-class HelloClientConfiguration {
-    @Value('${security.oauth2.hello.access-token-uri}')
+class TwitterClientConfiguration {
+
+    @Value('${security.oauth2.twitter.access-token-uri}')
     private String accessTokenUri
 
-    @Value('${security.oauth2.hello.client-id}')
+    @Value('${security.oauth2.twitter.client-id}')
     private String clientId
 
-    @Value('${security.oauth2.hello.client-secret}')
+    @Value('${security.oauth2.twitter.client-secret}')
     private String clientSecret
-
-    @Value('${security.oauth2.hello.scope}')
-    private String scope
 
     @Bean
     RequestInterceptor oauth2FeignRequestInterceptor() {
@@ -36,13 +34,10 @@ class HelloClientConfiguration {
 
     @Bean
     OAuth2ProtectedResourceDetails resource() {
-        def details = new ResourceOwnerPasswordResourceDetails()
+        def details = new ClientCredentialsResourceDetails()
         details.accessTokenUri = accessTokenUri
         details.clientId = clientId
         details.clientSecret = clientSecret
-        details.scope = [scope]
-        details.username = 'theUser'
-        details.password = 'thePassword'
         details
     }
 }

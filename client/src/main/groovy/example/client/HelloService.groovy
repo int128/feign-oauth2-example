@@ -11,13 +11,15 @@ class HelloService {
     @Inject
     HelloClient client
 
-    void hello(String... args) {
+    Hello hello(String... args) {
         if (args.length) {
             def hello = client.hello(args.join(','))
             log.info("Received from API server: $hello")
+            hello
         } else {
             def hello = client.hello()
             log.info("Received from API server: $hello")
+            hello
         }
     }
 }

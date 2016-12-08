@@ -17,7 +17,8 @@ This is an example of Spring Cloud Feign and Spring Security OAuth2.
   - Enable Feign client
   - Disable Hystrix
   - Enable Feign request interceptor for OAuth 2.0 client (`OAuth2FeignRequestInterceptor`)
-  - Example REST client
+  - Example REST client for the API server using resource owner password grant
+  - Example REST client for Twitter API using client credentials grant
 
 
 ## Run the authorization sequence (resource owner password grant)

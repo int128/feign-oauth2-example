@@ -1,5 +1,5 @@
 # Credential
-/api-gateway/src/main/resources/config
+config
 
 # Gradle
 .gradle
