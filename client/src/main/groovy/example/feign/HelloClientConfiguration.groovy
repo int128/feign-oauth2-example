@@ -1,5 +1,6 @@
 package example.feign
 
+import feign.Logger
 import feign.RequestInterceptor
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.cloud.security.oauth2.client.feign.OAuth2FeignRequestInterceptor
@@ -44,5 +45,10 @@ class HelloClientConfiguration {
         details.username = 'theUser'
         details.password = 'thePassword'
         details
+    }
+
+    @Bean
+    Logger.Level feignLoggerLevel() {
+        Logger.Level.BASIC
     }
 }

@@ -14,6 +14,7 @@ This is an example of Spring Cloud Feign and Spring Security OAuth2.
 - API client
   - Spring Boot without web server
   - Enable access token request logging
+  - Enable request and response logging
   - Enable Feign client
   - Disable Hystrix
   - Enable Feign request interceptor for OAuth 2.0 client (`OAuth2FeignRequestInterceptor`)

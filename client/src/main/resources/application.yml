@@ -3,6 +3,8 @@ spring.main.web-environment: false
 logging.level:
   # Enable logging of access token request
   org.springframework.web.client: DEBUG
+  # Enable request logging
+  example.client.HelloClient: DEBUG
 
 hello.service:
   url: http://localhost:8081
