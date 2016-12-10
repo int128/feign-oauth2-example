@@ -1,6 +1,8 @@
 logging.level:
   # Enable request logging
   org.springframework.web.filter: DEBUG
+  # Web security access control logging
+  org.springframework.security.web.access: DEBUG
 
 server:
   port: 8081
