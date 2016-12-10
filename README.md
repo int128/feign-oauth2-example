@@ -92,5 +92,96 @@ curl -v -H 'Authorization: Bearer 50480ab0-4616-449c-823b-e5eb41ebe44f' \
 ```
 
 ```json
-{"name":"world"}
+{"name":"theUser"}
+```
+
+```sh
+curl -v -H 'Authorization: Bearer 50480ab0-4616-449c-823b-e5eb41ebe44f' \
+  http://localhost:8081/user
+```
+
+```json
+{
+  "details": {
+    "remoteAddress": "0:0:0:0:0:0:0:1",
+    "sessionId": null,
+    "tokenValue": "50480ab0-4616-449c-823b-e5eb41ebe44f",
+    "tokenType": "Bearer",
+    "decodedDetails": null
+  },
+  "authorities": [
+    {
+      "authority": "ROLE_USER"
+    }
+  ],
+  "authenticated": true,
+  "userAuthentication": {
+    "details": {
+      "grant_type": "password",
+      "scope": "foo",
+      "username": "theUser"
+    },
+    "authorities": [
+      {
+        "authority": "ROLE_USER"
+      }
+    ],
+    "authenticated": true,
+    "principal": {
+      "password": null,
+      "username": "theUser",
+      "authorities": [
+        {
+          "authority": "ROLE_USER"
+        }
+      ],
+      "accountNonExpired": true,
+      "accountNonLocked": true,
+      "credentialsNonExpired": true,
+      "enabled": true
+    },
+    "credentials": null,
+    "name": "theUser"
+  },
+  "oauth2Request": {
+    "clientId": "theId",
+    "scope": [
+      "foo"
+    ],
+    "requestParameters": {
+      "grant_type": "password",
+      "scope": "foo",
+      "username": "theUser"
+    },
+    "resourceIds": [],
+    "authorities": [
+      {
+        "authority": "ROLE_USER"
+      }
+    ],
+    "approved": true,
+    "refresh": false,
+    "redirectUri": null,
+    "responseTypes": [],
+    "extensions": {},
+    "grantType": "password",
+    "refreshTokenRequest": null
+  },
+  "clientOnly": false,
+  "principal": {
+    "password": null,
+    "username": "theUser",
+    "authorities": [
+      {
+        "authority": "ROLE_USER"
+      }
+    ],
+    "accountNonExpired": true,
+    "accountNonLocked": true,
+    "credentialsNonExpired": true,
+    "enabled": true
+  },
+  "credentials": "",
+  "name": "theUser"
+}
 ```
