@@ -13,6 +13,3 @@ security:
   oauth2.client:
     client-id: theId
     client-secret: theSecret
-  user:
-    name: theUser
-    password: thePassword

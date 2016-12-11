@@ -18,9 +18,4 @@ class HelloController {
     Hello helloByName(@PathVariable String name) {
         new Hello(name)
     }
-
-    @GetMapping('/user')
-    def user(Authentication authentication) {
-        authentication
-    }
 }

@@ -42,8 +42,8 @@ class HelloClientConfiguration {
         details.clientId = clientId
         details.clientSecret = clientSecret
         details.scope = [scope]
-        details.username = 'theUser'
-        details.password = 'thePassword'
+        details.username = 'theUser1'
+        details.password = 'theResourceOwnerPassword'
         details
     }
 

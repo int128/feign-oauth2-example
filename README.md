@@ -9,7 +9,7 @@ This is an example of Spring Cloud Feign and Spring Security OAuth2.
   - Enable OAuth authorization server
   - Enable OAuth resource server
   - Configure OAuth client ID and secret
-  - Configure resource owner user and password
+  - Configure resource owners (`theUser1` and `theUser2`)
   - Example REST controller
 - API client (CLI)
   - Spring Boot without web server
@@ -59,7 +59,7 @@ API client:
 2016-12-10 22:24:38.586 DEBUG [-,,,] 16048 --- [  restartedMain] example.client.HelloClient               : [HelloClient#hello] ---> GET http://localhost:8081/hello HTTP/1.1
 2016-12-10 22:24:38.645 DEBUG [-,,,] 16048 --- [  restartedMain] example.client.HelloClient               : [HelloClient#hello] <--- HTTP/1.1 200 OK (54ms)
 2016-12-10 22:24:38.765 DEBUG [-,,,] 16048 --- [  restartedMain] o.s.w.c.HttpMessageConverterExtractor    : Reading [class example.client.Hello] as "application/json;charset=UTF-8" using [org.springframework.http.converter.json.MappingJackson2HttpMessageConverter@454a8dd2]
-2016-12-10 22:24:38.905  INFO [-,,,] 16048 --- [  restartedMain] example.client.HelloService              : Received from API server: example.client.Hello(theUser)
+2016-12-10 22:24:38.905  INFO [-,,,] 16048 --- [  restartedMain] example.client.HelloService              : Received from API server: example.client.Hello(theUser1)
 2016-12-10 22:24:39.255 DEBUG [-,,,] 16048 --- [  restartedMain] o.s.web.client.RestTemplate              : Created POST request for "https://api.twitter.com/oauth2/token"
 2016-12-10 22:24:39.973 DEBUG [-,,,] 16048 --- [  restartedMain] o.s.web.client.RestTemplate              : POST request for "https://api.twitter.com/oauth2/token" resulted in 200 (OK)
 2016-12-10 22:24:39.974 DEBUG [-,,,] 16048 --- [  restartedMain] o.s.w.c.HttpMessageConverterExtractor    : Reading [interface org.springframework.security.oauth2.common.OAuth2AccessToken] as "application/json;charset=utf-8" using [org.springframework.http.converter.json.MappingJackson2HttpMessageConverter@7763b804]
@@ -78,11 +78,11 @@ API server:
 2016-12-10 22:24:38.419 DEBUG 15598 --- [tp1430058124-18] o.s.w.f.CommonsRequestLoggingFilter      : After request [uri=/oauth/token;client=127.0.0.1;user=theId;headers={Authorization=[Basic dGhlSWQ6dGhlU2VjcmV0], Accept=[application/json, application/x-www-form-urlencoded], Cache-Control=[no-cache], User-Agent=[Java/1.8.0_102], Connection=[keep-alive], Host=[localhost:8081], Pragma=[no-cache], Content-Length=[72], Content-Type=[application/x-www-form-urlencoded;charset=UTF-8]};payload=password=thePassword&grant_type=password&scope=the]
 2016-12-10 22:24:38.424 DEBUG 15598 --- [tp1430058124-18] o.s.s.w.a.ExceptionTranslationFilter     : Chain processed normally
 2016-12-10 22:24:38.608 DEBUG 15598 --- [tp1430058124-15] o.s.s.w.a.i.FilterSecurityInterceptor    : Secure object: FilterInvocation: URL: /hello; Attributes: [#oauth2.throwOnError(authenticated)]
-2016-12-10 22:24:38.609 DEBUG 15598 --- [tp1430058124-15] o.s.s.w.a.i.FilterSecurityInterceptor    : Previously Authenticated: org.springframework.security.oauth2.provider.OAuth2Authentication@8449a742: Principal: org.springframework.security.core.userdetails.User@af827fdc: Username: theUser; Password: [PROTECTED]; Enabled: true; AccountNonExpired: true; credentialsNonExpired: true; AccountNonLocked: true; Granted Authorities: ROLE_USER; Credentials: [PROTECTED]; Authenticated: true; Details: remoteAddress=127.0.0.1, tokenType=BearertokenValue=<TOKEN>; Granted Authorities: ROLE_USER
+2016-12-10 22:24:38.609 DEBUG 15598 --- [tp1430058124-15] o.s.s.w.a.i.FilterSecurityInterceptor    : Previously Authenticated: org.springframework.security.oauth2.provider.OAuth2Authentication@8449a742: Principal: org.springframework.security.core.userdetails.User@af827fdc: Username: theUser1; Password: [PROTECTED]; Enabled: true; AccountNonExpired: true; credentialsNonExpired: true; AccountNonLocked: true; Granted Authorities: ROLE_USER; Credentials: [PROTECTED]; Authenticated: true; Details: remoteAddress=127.0.0.1, tokenType=BearertokenValue=<TOKEN>; Granted Authorities: ROLE_USER
 2016-12-10 22:24:38.609 DEBUG 15598 --- [tp1430058124-15] o.s.s.w.a.i.FilterSecurityInterceptor    : Authorization successful
 2016-12-10 22:24:38.609 DEBUG 15598 --- [tp1430058124-15] o.s.s.w.a.i.FilterSecurityInterceptor    : RunAsManager did not change Authentication object
-2016-12-10 22:24:38.610 DEBUG 15598 --- [tp1430058124-15] o.s.w.f.CommonsRequestLoggingFilter      : Before request [uri=/hello;client=127.0.0.1;user=theUser;headers={Authorization=[Bearer 4113439f-6847-490c-af9d-1c7240aeb855], X-Span-Name=[http:/hello], Accept=[*/*], X-B3-SpanId=[46f80160a8979524], User-Agent=[Java/1.8.0_102], Connection=[keep-alive], X-B3-Sampled=[0], X-B3-TraceId=[46f80160a8979524], Host=[localhost:8081]}]
-2016-12-10 22:24:38.622 DEBUG 15598 --- [tp1430058124-15] o.s.w.f.CommonsRequestLoggingFilter      : After request [uri=/hello;client=127.0.0.1;user=theUser;headers={Authorization=[Bearer 4113439f-6847-490c-af9d-1c7240aeb855], X-Span-Name=[http:/hello], Accept=[*/*], X-B3-SpanId=[46f80160a8979524], User-Agent=[Java/1.8.0_102], Connection=[keep-alive], X-B3-Sampled=[0], X-B3-TraceId=[46f80160a8979524], Host=[localhost:8081]}]
+2016-12-10 22:24:38.610 DEBUG 15598 --- [tp1430058124-15] o.s.w.f.CommonsRequestLoggingFilter      : Before request [uri=/hello;client=127.0.0.1;user=theUser1;headers={Authorization=[Bearer 4113439f-6847-490c-af9d-1c7240aeb855], X-Span-Name=[http:/hello], Accept=[*/*], X-B3-SpanId=[46f80160a8979524], User-Agent=[Java/1.8.0_102], Connection=[keep-alive], X-B3-Sampled=[0], X-B3-TraceId=[46f80160a8979524], Host=[localhost:8081]}]
+2016-12-10 22:24:38.622 DEBUG 15598 --- [tp1430058124-15] o.s.w.f.CommonsRequestLoggingFilter      : After request [uri=/hello;client=127.0.0.1;user=theUser1;headers={Authorization=[Bearer 4113439f-6847-490c-af9d-1c7240aeb855], X-Span-Name=[http:/hello], Accept=[*/*], X-B3-SpanId=[46f80160a8979524], User-Agent=[Java/1.8.0_102], Connection=[keep-alive], X-B3-Sampled=[0], X-B3-TraceId=[46f80160a8979524], Host=[localhost:8081]}]
 2016-12-10 22:24:38.623 DEBUG 15598 --- [tp1430058124-15] o.s.s.w.a.ExceptionTranslationFilter     : Chain processed normally
 ```
 
@@ -127,11 +127,11 @@ API server:
 2016-12-10 22:32:59.607 DEBUG 15598 --- [tp1430058124-18] o.s.w.f.CommonsRequestLoggingFilter      : After request [uri=/oauth/token;client=127.0.0.1;user=theId;headers={Authorization=[Basic dGhlSWQ6dGhlU2VjcmV0], Accept=[application/json, application/x-www-form-urlencoded], Cache-Control=[no-cache], User-Agent=[Java/1.8.0_102], Connection=[keep-alive], Host=[localhost:8081], Pragma=[no-cache], Content-Length=[72], Content-Type=[application/x-www-form-urlencoded;charset=UTF-8]};payload=password=thePassword&grant_type=password&scope=the]
 2016-12-10 22:32:59.607 DEBUG 15598 --- [tp1430058124-18] o.s.s.w.a.ExceptionTranslationFilter     : Chain processed normally
 2016-12-10 22:32:59.686 DEBUG 15598 --- [tp1430058124-15] o.s.s.w.a.i.FilterSecurityInterceptor    : Secure object: FilterInvocation: URL: /hello; Attributes: [#oauth2.throwOnError(authenticated)]
-2016-12-10 22:32:59.686 DEBUG 15598 --- [tp1430058124-15] o.s.s.w.a.i.FilterSecurityInterceptor    : Previously Authenticated: org.springframework.security.oauth2.provider.OAuth2Authentication@8449a742: Principal: org.springframework.security.core.userdetails.User@af827fdc: Username: theUser; Password: [PROTECTED]; Enabled: true; AccountNonExpired: true; credentialsNonExpired: true; AccountNonLocked: true; Granted Authorities: ROLE_USER; Credentials: [PROTECTED]; Authenticated: true; Details: remoteAddress=127.0.0.1, tokenType=BearertokenValue=<TOKEN>; Granted Authorities: ROLE_USER
+2016-12-10 22:32:59.686 DEBUG 15598 --- [tp1430058124-15] o.s.s.w.a.i.FilterSecurityInterceptor    : Previously Authenticated: org.springframework.security.oauth2.provider.OAuth2Authentication@8449a742: Principal: org.springframework.security.core.userdetails.User@af827fdc: Username: theUser1; Password: [PROTECTED]; Enabled: true; AccountNonExpired: true; credentialsNonExpired: true; AccountNonLocked: true; Granted Authorities: ROLE_USER; Credentials: [PROTECTED]; Authenticated: true; Details: remoteAddress=127.0.0.1, tokenType=BearertokenValue=<TOKEN>; Granted Authorities: ROLE_USER
 2016-12-10 22:32:59.687 DEBUG 15598 --- [tp1430058124-15] o.s.s.w.a.i.FilterSecurityInterceptor    : Authorization successful
 2016-12-10 22:32:59.687 DEBUG 15598 --- [tp1430058124-15] o.s.s.w.a.i.FilterSecurityInterceptor    : RunAsManager did not change Authentication object
-2016-12-10 22:32:59.687 DEBUG 15598 --- [tp1430058124-15] o.s.w.f.CommonsRequestLoggingFilter      : Before request [uri=/hello;client=127.0.0.1;user=theUser;headers={Authorization=[Bearer 4113439f-6847-490c-af9d-1c7240aeb855], X-Span-Name=[http:/hello], Accept=[*/*], X-B3-SpanId=[420a59bc1f5b11f9], X-B3-ParentSpanId=[5f4b7aec6370e786], User-Agent=[Java/1.8.0_102], Connection=[keep-alive], X-B3-Sampled=[0], X-B3-TraceId=[d9e9ef7a60746d62], Host=[localhost:8081]}]
-2016-12-10 22:32:59.691 DEBUG 15598 --- [tp1430058124-15] o.s.w.f.CommonsRequestLoggingFilter      : After request [uri=/hello;client=127.0.0.1;user=theUser;headers={Authorization=[Bearer 4113439f-6847-490c-af9d-1c7240aeb855], X-Span-Name=[http:/hello], Accept=[*/*], X-B3-SpanId=[420a59bc1f5b11f9], X-B3-ParentSpanId=[5f4b7aec6370e786], User-Agent=[Java/1.8.0_102], Connection=[keep-alive], X-B3-Sampled=[0], X-B3-TraceId=[d9e9ef7a60746d62], Host=[localhost:8081]}]
+2016-12-10 22:32:59.687 DEBUG 15598 --- [tp1430058124-15] o.s.w.f.CommonsRequestLoggingFilter      : Before request [uri=/hello;client=127.0.0.1;user=theUser1;headers={Authorization=[Bearer 4113439f-6847-490c-af9d-1c7240aeb855], X-Span-Name=[http:/hello], Accept=[*/*], X-B3-SpanId=[420a59bc1f5b11f9], X-B3-ParentSpanId=[5f4b7aec6370e786], User-Agent=[Java/1.8.0_102], Connection=[keep-alive], X-B3-Sampled=[0], X-B3-TraceId=[d9e9ef7a60746d62], Host=[localhost:8081]}]
+2016-12-10 22:32:59.691 DEBUG 15598 --- [tp1430058124-15] o.s.w.f.CommonsRequestLoggingFilter      : After request [uri=/hello;client=127.0.0.1;user=theUser1;headers={Authorization=[Bearer 4113439f-6847-490c-af9d-1c7240aeb855], X-Span-Name=[http:/hello], Accept=[*/*], X-B3-SpanId=[420a59bc1f5b11f9], X-B3-ParentSpanId=[5f4b7aec6370e786], User-Agent=[Java/1.8.0_102], Connection=[keep-alive], X-B3-Sampled=[0], X-B3-TraceId=[d9e9ef7a60746d62], Host=[localhost:8081]}]
 2016-12-10 22:32:59.691 DEBUG 15598 --- [tp1430058124-15] o.s.s.w.a.ExceptionTranslationFilter     : Chain processed normally
 ```
 
@@ -155,8 +155,8 @@ Acquire an access token.
 curl -v -u theId:theSecret \
   http://localhost:8081/oauth/token \
   -d grant_type=password \
-  -d username=theUser \
-  -d password=thePassword \
+  -d username=theUser1 \
+  -d password=theResourceOwnerPassword \
   -d scope=foo
 ```
 
@@ -176,7 +176,7 @@ curl -v -H 'Authorization: Bearer 50480ab0-4616-449c-823b-e5eb41ebe44f' \
 ```
 
 ```json
-{"name":"theUser"}
+{"name":"theUser1"}
 ```
 
 ```sh
@@ -203,7 +203,7 @@ curl -v -H 'Authorization: Bearer 50480ab0-4616-449c-823b-e5eb41ebe44f' \
     "details": {
       "grant_type": "password",
       "scope": "foo",
-      "username": "theUser"
+      "username": "theUser1"
     },
     "authorities": [
       {
@@ -213,7 +213,7 @@ curl -v -H 'Authorization: Bearer 50480ab0-4616-449c-823b-e5eb41ebe44f' \
     "authenticated": true,
     "principal": {
       "password": null,
-      "username": "theUser",
+      "username": "theUser1",
       "authorities": [
         {
           "authority": "ROLE_USER"
@@ -225,7 +225,7 @@ curl -v -H 'Authorization: Bearer 50480ab0-4616-449c-823b-e5eb41ebe44f' \
       "enabled": true
     },
     "credentials": null,
-    "name": "theUser"
+    "name": "theUser1"
   },
   "oauth2Request": {
     "clientId": "theId",
@@ -235,7 +235,7 @@ curl -v -H 'Authorization: Bearer 50480ab0-4616-449c-823b-e5eb41ebe44f' \
     "requestParameters": {
       "grant_type": "password",
       "scope": "foo",
-      "username": "theUser"
+      "username": "theUser1"
     },
     "resourceIds": [],
     "authorities": [
@@ -254,7 +254,7 @@ curl -v -H 'Authorization: Bearer 50480ab0-4616-449c-823b-e5eb41ebe44f' \
   "clientOnly": false,
   "principal": {
     "password": null,
-    "username": "theUser",
+    "username": "theUser1",
     "authorities": [
       {
         "authority": "ROLE_USER"
@@ -266,6 +266,6 @@ curl -v -H 'Authorization: Bearer 50480ab0-4616-449c-823b-e5eb41ebe44f' \
     "enabled": true
   },
   "credentials": "",
-  "name": "theUser"
+  "name": "theUser1"
 }
 ```
