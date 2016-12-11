@@ -39,7 +39,7 @@ This is an example of Spring Cloud Feign and Spring Security OAuth2.
 ```
 
 ```
-./gradlew client:bootRun
+./gradlew client-cli:bootRun
 ```
 
 API client does:
