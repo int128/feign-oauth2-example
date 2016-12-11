@@ -1,0 +1,33 @@
+logging.level:
+  # Enable logging of access token request
+  org.springframework.web.client: DEBUG
+  # Enable request logging
+  example.client.HelloClient: DEBUG
+  # Enable request logging
+  org.springframework.web.filter: DEBUG
+
+server:
+  port: 8082
+
+hello.service:
+  url: http://localhost:8081
+
+twitter.service:
+  url: https://api.twitter.com/1.1
+
+feign.hystrix.enabled: false
+
+security:
+  basic:
+    enabled: false
+  oauth2:
+    hello:
+      access-token-uri: http://localhost:8081/oauth/token
+      client-id: theId
+      client-secret: theSecret
+      scope: theScope
+    twitter:
+      access-token-uri: https://api.twitter.com/oauth2/token
+      # Credentials goes to /src/main/resources/config/application.yml
+      #client-id:
+      #client-secret:
