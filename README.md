@@ -28,6 +28,9 @@ This is an example of Spring Cloud Feign and Spring Security OAuth2.
   - Enable Feign client
   - Disable Hystrix
   - Enable Feign request interceptor for OAuth 2.0 client (`OAuth2FeignRequestInterceptor`)
+    - Use Client Credentials Grant if not logged in
+    - Use Resource Owner Password Grant if logged in
+  - Configure to renew session on login
   - Example REST client for the API server using resource owner password grant
   - Example REST client for Twitter API using client credentials grant
 
@@ -97,10 +100,8 @@ API server:
 ./gradlew client-web:bootRun
 ```
 
-```
-curl -v http://localhost:8082/hello
-curl -v http://localhost:8082/hello
-```
+Access to http://localhost:8082/hello and 
+
 
 API client:
 

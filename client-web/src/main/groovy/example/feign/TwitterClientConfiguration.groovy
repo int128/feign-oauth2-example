@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Value
 import org.springframework.cloud.security.oauth2.client.feign.OAuth2FeignRequestInterceptor
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
-import org.springframework.security.oauth2.client.DefaultOAuth2ClientContext
+import org.springframework.security.oauth2.client.OAuth2ClientContext
 import org.springframework.security.oauth2.client.resource.OAuth2ProtectedResourceDetails
 import org.springframework.security.oauth2.client.token.grant.client.ClientCredentialsResourceDetails
 
@@ -22,8 +22,8 @@ class TwitterClientConfiguration {
     private String clientSecret
 
     @Bean
-    RequestInterceptor oauth2FeignRequestInterceptor() {
-        new OAuth2FeignRequestInterceptor(new DefaultOAuth2ClientContext(), resource())
+    RequestInterceptor oauth2FeignRequestInterceptor(OAuth2ClientContext oAuth2ClientContext) {
+        new OAuth2FeignRequestInterceptor(oAuth2ClientContext, resource())
     }
 
     OAuth2ProtectedResourceDetails resource() {
