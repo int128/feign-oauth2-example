@@ -7,7 +7,6 @@ import org.springframework.cloud.security.oauth2.client.feign.OAuth2FeignRequest
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import org.springframework.security.oauth2.client.DefaultOAuth2ClientContext
-import org.springframework.security.oauth2.client.OAuth2ClientContext
 import org.springframework.security.oauth2.client.resource.OAuth2ProtectedResourceDetails
 import org.springframework.security.oauth2.client.token.grant.password.ResourceOwnerPasswordResourceDetails
 
@@ -27,15 +26,9 @@ class HelloClientConfiguration {
 
     @Bean
     RequestInterceptor oauth2FeignRequestInterceptor() {
-        new OAuth2FeignRequestInterceptor(oAuth2ClientContext(), resource())
+        new OAuth2FeignRequestInterceptor(new DefaultOAuth2ClientContext(), resource())
     }
 
-    @Bean
-    OAuth2ClientContext oAuth2ClientContext() {
-        new DefaultOAuth2ClientContext()
-    }
-
-    @Bean
     OAuth2ProtectedResourceDetails resource() {
         def details = new ResourceOwnerPasswordResourceDetails()
         details.accessTokenUri = accessTokenUri
