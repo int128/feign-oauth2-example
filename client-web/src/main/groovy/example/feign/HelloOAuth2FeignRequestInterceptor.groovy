@@ -12,9 +12,12 @@ import org.springframework.security.oauth2.client.http.AccessTokenRequiredExcept
 import org.springframework.security.oauth2.client.resource.OAuth2ProtectedResourceDetails
 import org.springframework.security.oauth2.client.resource.UserRedirectRequiredException
 import org.springframework.security.oauth2.client.token.AccessTokenProvider
+import org.springframework.security.oauth2.client.token.AccessTokenProviderChain
 import org.springframework.security.oauth2.client.token.AccessTokenRequest
 import org.springframework.security.oauth2.client.token.grant.client.ClientCredentialsAccessTokenProvider
 import org.springframework.security.oauth2.client.token.grant.client.ClientCredentialsResourceDetails
+import org.springframework.security.oauth2.client.token.grant.code.AuthorizationCodeAccessTokenProvider
+import org.springframework.security.oauth2.client.token.grant.implicit.ImplicitAccessTokenProvider
 import org.springframework.security.oauth2.client.token.grant.password.ResourceOwnerPasswordAccessTokenProvider
 import org.springframework.security.oauth2.client.token.grant.password.ResourceOwnerPasswordResourceDetails
 import org.springframework.security.oauth2.common.OAuth2AccessToken
@@ -35,6 +38,18 @@ class HelloOAuth2FeignRequestInterceptor extends OAuth2FeignRequestInterceptor {
 
     private final OAuth2ClientContext oAuth2ClientContext
 
+    private final AccessTokenProvider accessTokenProvider = {
+        def requestFactory = new HttpComponentsClientHttpRequestFactory()
+        def accessTokenProviders = Arrays.asList(
+            new AuthorizationCodeAccessTokenProvider(),
+            new ImplicitAccessTokenProvider(),
+            new ResourceOwnerPasswordAccessTokenProvider(),
+            new ClientCredentialsAccessTokenProvider()
+        )
+        accessTokenProviders*.requestFactory = requestFactory
+        new AccessTokenProviderChain(accessTokenProviders)
+    }()
+
     def HelloOAuth2FeignRequestInterceptor(OAuth2ClientContext oAuth2ClientContext) {
         super(oAuth2ClientContext, null)
         this.oAuth2ClientContext = oAuth2ClientContext
@@ -42,13 +57,13 @@ class HelloOAuth2FeignRequestInterceptor extends OAuth2FeignRequestInterceptor {
 
     @Override
     protected OAuth2AccessToken acquireAccessToken() {
-        acquireAccessToken(accessTokenProvider(), resource())
+        acquireAccessToken(resource())
     }
 
     /**
      * @see OAuth2FeignRequestInterceptor#acquireAccessToken()
      */
-    protected OAuth2AccessToken acquireAccessToken(AccessTokenProvider accessTokenProvider, OAuth2ProtectedResourceDetails resource)
+    protected OAuth2AccessToken acquireAccessToken(OAuth2ProtectedResourceDetails resource)
         throws UserRedirectRequiredException {
         AccessTokenRequest tokenRequest = oAuth2ClientContext.getAccessTokenRequest();
         if (tokenRequest == null) {
@@ -75,22 +90,6 @@ class HelloOAuth2FeignRequestInterceptor extends OAuth2FeignRequestInterceptor {
         }
         oAuth2ClientContext.setAccessToken(obtainableAccessToken);
         return obtainableAccessToken;
-    }
-
-    private accessTokenProvider() {
-        def accessTokenProvider = accessTokenProviderByAuthentication()
-        // Using HttpClient for logging
-        accessTokenProvider.requestFactory = new HttpComponentsClientHttpRequestFactory()
-        accessTokenProvider
-    }
-
-    private accessTokenProviderByAuthentication() {
-        def authentication = SecurityContextHolder.context.authentication
-        if (!authentication || authentication instanceof AnonymousAuthenticationToken) {
-            new ClientCredentialsAccessTokenProvider()
-        } else {
-            new ResourceOwnerPasswordAccessTokenProvider()
-        }
     }
 
     private resource() {
