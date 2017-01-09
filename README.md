@@ -106,15 +106,31 @@ Access to http://localhost:8082/hello and
 API client:
 
 ```
-2016-12-10 22:32:59.582 DEBUG [-,d9e9ef7a60746d62,5f4b7aec6370e786,false] 16077 --- [tp1310768211-20] o.s.web.client.RestTemplate              : Created POST request for "http://localhost:8081/oauth/token"
-2016-12-10 22:32:59.613 DEBUG [-,d9e9ef7a60746d62,5f4b7aec6370e786,false] 16077 --- [tp1310768211-20] o.s.web.client.RestTemplate              : POST request for "http://localhost:8081/oauth/token" resulted in 200 (OK)
-2016-12-10 22:32:59.646 DEBUG [-,d9e9ef7a60746d62,5f4b7aec6370e786,false] 16077 --- [tp1310768211-20] o.s.w.c.HttpMessageConverterExtractor    : Reading [interface org.springframework.security.oauth2.common.OAuth2AccessToken] as "application/json;charset=UTF-8" using [org.springframework.http.converter.json.MappingJackson2HttpMessageConverter@115129e]
-2016-12-10 22:32:59.678 DEBUG [-,d9e9ef7a60746d62,5f4b7aec6370e786,false] 16077 --- [tp1310768211-20] example.client.HelloClient               : [HelloClient#hello] ---> GET http://localhost:8081/hello HTTP/1.1
-2016-12-10 22:32:59.701 DEBUG [-,d9e9ef7a60746d62,5f4b7aec6370e786,false] 16077 --- [tp1310768211-20] example.client.HelloClient               : [HelloClient#hello] <--- HTTP/1.1 200 OK (21ms)
-2016-12-10 22:32:59.770 DEBUG [-,d9e9ef7a60746d62,5f4b7aec6370e786,false] 16077 --- [tp1310768211-20] o.s.w.c.HttpMessageConverterExtractor    : Reading [class example.client.Hello] as "application/json;charset=UTF-8" using [org.springframework.http.converter.json.MappingJackson2HttpMessageConverter@6e75f0a8]
-2016-12-10 22:34:49.696 DEBUG [-,91b0a56fcd7c1738,8ad7bc50d83b3cd2,false] 16077 --- [tp1310768211-17] example.client.HelloClient               : [HelloClient#hello] ---> GET http://localhost:8081/hello HTTP/1.1
-2016-12-10 22:34:49.714 DEBUG [-,91b0a56fcd7c1738,8ad7bc50d83b3cd2,false] 16077 --- [tp1310768211-17] example.client.HelloClient               : [HelloClient#hello] <--- HTTP/1.1 200 OK (16ms)
-2016-12-10 22:34:49.715 DEBUG [-,91b0a56fcd7c1738,8ad7bc50d83b3cd2,false] 16077 --- [tp1310768211-17] o.s.w.c.HttpMessageConverterExtractor    : Reading [class example.client.Hello] as "application/json;charset=UTF-8" using [org.springframework.http.converter.json.MappingJackson2HttpMessageConverter@6e75f0a8]
+2017-01-09 14:22:35.663 DEBUG [-,685d38a777d8d24e,30cac0baa49821b7,false] 17935 --- [tp1337171317-20] e.f.HelloOAuth2FeignRequestInterceptor   : ClientCredentialsResourceDetails
+2017-01-09 14:22:35.771 DEBUG [-,685d38a777d8d24e,30cac0baa49821b7,false] 17935 --- [tp1337171317-20] o.s.web.client.RestTemplate              : Created POST request for "http://localhost:8081/oauth/token"
+2017-01-09 14:22:35.900 DEBUG [-,685d38a777d8d24e,30cac0baa49821b7,false] 17935 --- [tp1337171317-20] org.apache.http.headers                  : http-outgoing-0 >> POST /oauth/token HTTP/1.1
+2017-01-09 14:22:35.900 DEBUG [-,685d38a777d8d24e,30cac0baa49821b7,false] 17935 --- [tp1337171317-20] org.apache.http.headers                  : http-outgoing-0 >> Authorization: Basic dGhlSWQ6dGhlU2VjcmV0
+2017-01-09 14:22:35.900 DEBUG [-,685d38a777d8d24e,30cac0baa49821b7,false] 17935 --- [tp1337171317-20] org.apache.http.headers                  : http-outgoing-0 >> Accept: application/json, application/x-www-form-urlencoded
+2017-01-09 14:22:35.900 DEBUG [-,685d38a777d8d24e,30cac0baa49821b7,false] 17935 --- [tp1337171317-20] org.apache.http.headers                  : http-outgoing-0 >> Content-Type: application/x-www-form-urlencoded
+2017-01-09 14:22:35.900 DEBUG [-,685d38a777d8d24e,30cac0baa49821b7,false] 17935 --- [tp1337171317-20] org.apache.http.headers                  : http-outgoing-0 >> Content-Length: 44
+2017-01-09 14:22:35.901 DEBUG [-,685d38a777d8d24e,30cac0baa49821b7,false] 17935 --- [tp1337171317-20] org.apache.http.headers                  : http-outgoing-0 >> Host: localhost:8081
+2017-01-09 14:22:35.901 DEBUG [-,685d38a777d8d24e,30cac0baa49821b7,false] 17935 --- [tp1337171317-20] org.apache.http.headers                  : http-outgoing-0 >> Connection: Keep-Alive
+2017-01-09 14:22:35.901 DEBUG [-,685d38a777d8d24e,30cac0baa49821b7,false] 17935 --- [tp1337171317-20] org.apache.http.headers                  : http-outgoing-0 >> User-Agent: Apache-HttpClient/4.5.2 (Java/1.8.0_102)
+2017-01-09 14:22:35.901 DEBUG [-,685d38a777d8d24e,30cac0baa49821b7,false] 17935 --- [tp1337171317-20] org.apache.http.headers                  : http-outgoing-0 >> Accept-Encoding: gzip,deflate
+2017-01-09 14:22:36.289 DEBUG [-,685d38a777d8d24e,30cac0baa49821b7,false] 17935 --- [tp1337171317-20] org.apache.http.headers                  : http-outgoing-0 << HTTP/1.1 200 OK
+2017-01-09 14:22:36.289 DEBUG [-,685d38a777d8d24e,30cac0baa49821b7,false] 17935 --- [tp1337171317-20] org.apache.http.headers                  : http-outgoing-0 << Date: Mon, 09 Jan 2017 05:22:36 GMT
+2017-01-09 14:22:36.289 DEBUG [-,685d38a777d8d24e,30cac0baa49821b7,false] 17935 --- [tp1337171317-20] org.apache.http.headers                  : http-outgoing-0 << Cache-Control: no-store
+2017-01-09 14:22:36.289 DEBUG [-,685d38a777d8d24e,30cac0baa49821b7,false] 17935 --- [tp1337171317-20] org.apache.http.headers                  : http-outgoing-0 << Pragma: no-cache
+2017-01-09 14:22:36.289 DEBUG [-,685d38a777d8d24e,30cac0baa49821b7,false] 17935 --- [tp1337171317-20] org.apache.http.headers                  : http-outgoing-0 << Content-Type: application/json;charset=UTF-8
+2017-01-09 14:22:36.289 DEBUG [-,685d38a777d8d24e,30cac0baa49821b7,false] 17935 --- [tp1337171317-20] org.apache.http.headers                  : http-outgoing-0 << X-Content-Type-Options: nosniff
+2017-01-09 14:22:36.289 DEBUG [-,685d38a777d8d24e,30cac0baa49821b7,false] 17935 --- [tp1337171317-20] org.apache.http.headers                  : http-outgoing-0 << X-XSS-Protection: 1; mode=block
+2017-01-09 14:22:36.289 DEBUG [-,685d38a777d8d24e,30cac0baa49821b7,false] 17935 --- [tp1337171317-20] org.apache.http.headers                  : http-outgoing-0 << X-Frame-Options: DENY
+2017-01-09 14:22:36.289 DEBUG [-,685d38a777d8d24e,30cac0baa49821b7,false] 17935 --- [tp1337171317-20] org.apache.http.headers                  : http-outgoing-0 << Transfer-Encoding: chunked
+2017-01-09 14:22:36.310 DEBUG [-,685d38a777d8d24e,30cac0baa49821b7,false] 17935 --- [tp1337171317-20] o.s.web.client.RestTemplate              : POST request for "http://localhost:8081/oauth/token" resulted in 200 (OK)
+2017-01-09 14:22:36.347 DEBUG [-,685d38a777d8d24e,30cac0baa49821b7,false] 17935 --- [tp1337171317-20] o.s.w.c.HttpMessageConverterExtractor    : Reading [interface org.springframework.security.oauth2.common.OAuth2AccessToken] as "application/json;charset=UTF-8" using [org.springframework.http.converter.json.MappingJackson2HttpMessageConverter@7e90c131]
+2017-01-09 14:22:36.391 DEBUG [-,685d38a777d8d24e,30cac0baa49821b7,false] 17935 --- [tp1337171317-20] example.client.HelloClient               : [HelloClient#hello] ---> GET http://localhost:8081/hello HTTP/1.1
+2017-01-09 14:22:36.548 DEBUG [-,685d38a777d8d24e,30cac0baa49821b7,false] 17935 --- [tp1337171317-20] example.client.HelloClient               : [HelloClient#hello] <--- HTTP/1.1 200 OK (156ms)
+2017-01-09 14:22:36.629 DEBUG [-,685d38a777d8d24e,30cac0baa49821b7,false] 17935 --- [tp1337171317-20] o.s.w.c.HttpMessageConverterExtractor    : Reading [class example.client.Hello] as "application/json;charset=UTF-8" using [org.springframework.http.converter.json.MappingJackson2HttpMessageConverter@73b62672]
 ```
 
 API server:
