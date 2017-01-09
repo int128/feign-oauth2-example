@@ -1,15 +1,10 @@
-buildscript {
-    repositories {
-        jcenter()
-    }
-    dependencies {
-        classpath 'org.springframework.boot:spring-boot-gradle-plugin:1.4.1.RELEASE'
-    }
+plugins {
+    id 'org.springframework.boot' version '1.4.3.RELEASE'
 }
 
 subprojects {
     apply plugin: 'groovy'
-    apply plugin: 'spring-boot'
+    apply plugin: 'org.springframework.boot'
     apply plugin: 'idea'
 
     sourceCompatibility = JavaVersion.VERSION_1_8
