@@ -1,6 +1,8 @@
 logging.level:
   example: DEBUG
   # Enable logging of access token request
+  org.apache.http.headers: DEBUG
+  org.apache.http.wire: DEBUG
   org.springframework.web.client: DEBUG
   # Enable request logging
   example.client.HelloClient: DEBUG
